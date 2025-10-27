@@ -1,0 +1,22 @@
+# core
+streamlit
+python-multipart
+PyMuPDF
+python-pptx
+pytesseract
+whisper  # or openai-whisper
+moviepy
+torch>=2.0
+transformers
+sentence-transformers
+keybert
+spacy
+networkx
+plotly
+streamlit-cytoscapejs  # or streamlit-agraph
+chroma-db  # or faiss-cpu
+langchain
+openai  # optional if you use OpenAI/Gemini
+kaleido  # plotly export
+reportlab  # pdf generation
+python-dotenv
