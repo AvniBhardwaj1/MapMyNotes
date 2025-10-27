@@ -137,3 +137,40 @@ Built using **Streamlit**, **Google Gemini**, and **D3.js**, it’s designed to 
 ```bash
 git clone https://github.com/AvniBhardwaj1/MapMyNotes.git
 cd MapMyNotes
+
+## 🌱 Future Enhancements
+
+> _“Innovation never stops — these are the next steps planned for MapMyNotes.”_
+
+### 🔹 1. Domain-Aware Learning
+Automatically detect the **subject domain** (e.g., Medical, Engineering, Finance) to tailor explanations, tone, and quiz difficulty level according to the user’s discipline.
+
+### 🔹 2. Multi-Document Mapping
+Enable uploading **multiple notes or PDFs at once** to generate cross-linked mind maps, showing how concepts across subjects interconnect — ideal for interdisciplinary learning.
+
+### 🔹 3. Semantic Search
+Integrate a **vector-based semantic search** (using Sentence-BERT, Word2Vec, or MiniLM) to help users find conceptually related topics or terms within and across uploaded notes.
+
+### 🔹 4. Voice Interaction
+Incorporate **speech-to-text** and **text-to-speech** features to let users speak their notes and listen to AI-generated summaries or quiz questions — promoting hands-free learning.
+
+### 🔹 5. Enhanced Mind Map Intelligence
+Introduce **auto-clustering**, **smart node resizing**, and **focus mode**, allowing the map to automatically expand or collapse sections based on importance or user interactions.
+
+### 🔹 6. Cloud Integration
+Allow users to **save and sync** their generated mind maps to Google Drive, Firebase, or Notion, ensuring persistent access and collaboration across devices.
+
+### 🔹 7. Study Analytics Dashboard
+Develop a **learning analytics dashboard** that tracks progress — topics studied, quiz scores, and weaker areas — and recommends personalized revision strategies.
+
+### 🔹 8. AI Tutor Mode
+Transform the flashcards into an **interactive AI tutor chatbot** that explains topics conversationally, answers follow-up questions, and helps students revise dynamically.
+
+---
+
+## 👩‍💻 Author
+
+**Avni Bhardwaj**  
+B.Tech Computer Engineering – SVKM’s NMIMS, Indore  
+🔗 [GitHub](https://github.com/AvniBhardwaj1)
+
