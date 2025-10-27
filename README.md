@@ -7,12 +7,6 @@
 
 ---
 
-<p align="center">
-  <img src="INSERT_YOUR_PROJECT_IMAGE_HERE" width="850px" alt="MapMyNotes Screenshot"/>
-</p>
-
----
-
 ## ✨ Overview
 
 **MapMyNotes** is an intelligent **NLP-based study assistant** that converts your notes, PDFs, or presentations into **interactive mind maps**, complete with **AI-generated flashcards and quizzes** for revision.
