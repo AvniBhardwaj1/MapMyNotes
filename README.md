@@ -1,176 +1,199 @@
-# 🧠 MapMyNotes – AI-Powered NLP Study Companion
+<h1 align="center">🧠 MapMyNotes – AI-Powered NLP Study Companion</h1>
 
-**MapMyNotes** is an intelligent, NLP-based study assistant that converts your notes, PDFs, or presentations into **interactive mind maps**, complete with **AI-generated flashcards and quizzes** for revision.
-
-Built using **Streamlit**, **Google Gemini**, and **D3.js**, it’s designed to help students and learners visualize, understand, and retain study material more effectively.
-
----
-
-## 🚀 Features
-
-✅ **Text to Mind Map** – Upload any text, PDF, or PPTX, and the system generates an interactive D3-based mind map.  
-✅ **Smart Hierarchical Structuring** – Uses Gemini to extract key topics and subtopics in a multi-level hierarchy.  
-✅ **Layman + Technical Explanations** – Hover over nodes to get AI-generated explanations that simplify complex topics.  
-✅ **Interactive Flashcards & Quizzes** – Automatically generates quick flashcards and multiple-choice quizzes for revision.  
-✅ **Download Map as PNG** – Save your visualized map locally.  
-✅ **Regenerate Flashcards Anytime** – Refresh questions without altering the mind map structure.  
-✅ **Unlimited Node Depth** – Supports deep hierarchies as Gemini dynamically decides topic levels.
+<p align="center">
+  <b>Transform your study notes into interactive mind maps with AI-generated explanations, flashcards, and quizzes.</b><br>
+  <i>Built using Streamlit · Google Gemini · D3.js</i>
+</p>
 
 ---
 
-## 🧩 Architecture Overview
-
-### 🔹 Input
-- Upload **PDF**, **PPTX**, or **plain text**.
-- Extracted using:
-  - `PyMuPDF` (`fitz`) for PDFs
-  - `python-pptx` for PPTX
-  - Direct read for `.txt`
-
-### 🔹 NLP Pipeline (`modules/pipeline.py`)
-1. **Text Preprocessing & Chunking**
-   - Large documents are split into manageable chunks.
-   - Each chunk is summarized using Gemini.
-
-2. **Topic Extraction & Hierarchy Generation**
-   - Prompt (`STRUCTURE_PROMPT`) guides Gemini to identify key topics and organize them hierarchically.
-   - Returns a JSON structure of topics, summaries, and subtopics.
-
-3. **Graph Conversion**
-   - JSON is converted into flat `nodes` and `edges` via `build_graph_from_hierarchy()`.
-
-4. **AI Node Explanations**
-   - Each topic node is explained using `explain_node_in_layman()` (from `hover_tooltip.py`).
-   - Includes a simple explanation, technical context, and analogy.
-
-5. **Summary + Quiz Generation**
-   - Gemini produces a concise study summary, bullet points, and quiz questions (`MAP_SUMMARY_PROMPT`).
-
-6. **Keyword Extraction**
-   - Extracts top recurring words using frequency analysis (`collections.Counter`).
+<p align="center">
+  <img src="INSERT_YOUR_PROJECT_IMAGE_HERE" width="850px" alt="MapMyNotes Screenshot"/>
+</p>
 
 ---
 
-### 🔹 Visualization (`modules/visualize.py`)
-- The hierarchical structure is rendered using **D3.js**.
-- Each node is color-coded by depth and includes:
-  - Topic name
-  - Hover explanation tooltip (layman + technical)
-- Supports **zoom**, **pan**, and **PNG download**.
+## ✨ Overview
+
+**MapMyNotes** is an intelligent **NLP-based study assistant** that converts your notes, PDFs, or presentations into **interactive mind maps**, complete with **AI-generated flashcards and quizzes** for revision.
+
+It helps learners visualize, understand, and retain information efficiently — combining Natural Language Processing, visualization, and education technology into one seamless tool.
 
 ---
 
-### 🔹 Smart Study Companion (Right Panel in `app.py`)
-- Displays **flashcards** and **quiz questions** derived from the generated summary.
-- Option to **regenerate flashcards** dynamically.
-- Full quiz mode with answer validation and scoring.
+## 🚀 Key Features
+
+| Feature | Description |
+|----------|-------------|
+| 🧩 **Text → Mind Map** | Upload notes (PDF, PPTX, or text) to generate a structured D3-based mind map. |
+| 🧠 **Hierarchical Structuring** | Uses Gemini to extract key concepts and organize them across multiple levels. |
+| 💬 **AI Explanations** | Hover over any node to see a layman + technical explanation. |
+| 📚 **Flashcards & Quizzes** | Auto-generated Q&A for self-testing and revision. |
+| 🎨 **Interactive UI** | Zoom, pan, and explore dynamic mind maps with smooth animations. |
+| 📸 **Download as PNG** | Save your mind map locally in one click. |
+| 🔁 **Regenerate Flashcards** | Get fresh questions anytime without losing your map. |
+| 🌳 **Unlimited Depth** | Gemini dynamically decides topic hierarchy — no depth restrictions. |
 
 ---
 
-## 🧠 End-to-End Data Flow
+## 🧩 Architecture & Workflow
 
-| Step | File | Function | Description |
-|------|------|-----------|--------------|
-| 1️⃣ Input Extraction | `extract_text.py` | `extract_from_pdf/pptx/text()` | Extracts text from uploaded file |
-| 2️⃣ NLP Processing | `pipeline.py` | `process_text_to_mindmap()` | Summarizes and extracts topic hierarchy |
-| 3️⃣ Graph Building | `pipeline.py` | `build_graph_from_hierarchy()` | Converts hierarchy → nodes + edges |
-| 4️⃣ Explanations | `hover_tooltip.py` | `explain_node_in_layman()` | AI explanation for hover tooltips |
-| 5️⃣ Visualization | `visualize.py` | `visualize_graph()` | D3 mind map rendering |
-| 6️⃣ Quiz & Flashcards | `copilot.py` / `app.py` | `generate_quiz_and_flashcards()` | Generates Q&A from summary |
-| 7️⃣ UI Rendering | `app.py` | Streamlit components | Displays everything interactively |
+### 🔹 1. Input Layer
+Users can upload:
+- 📄 **PDFs** (via `PyMuPDF`)
+- 🖼️ **PPTX** (via `python-pptx`)
+- 📝 **Plain Text**  
+Text is extracted and preprocessed.
+
+### 🔹 2. NLP Processing (`modules/pipeline.py`)
+1. **Chunking & Summarization:** Large text is divided into smaller pieces and summarized by Gemini.  
+2. **Hierarchy Extraction:** Gemini identifies key topics & subtopics via `STRUCTURE_PROMPT`.  
+3. **Graph Creation:** Hierarchy converted into nodes & edges (`build_graph_from_hierarchy`).  
+4. **Explanations:** Each node explained by `explain_node_in_layman()` (Gemini-generated).  
+5. **Quiz Generation:** Using `MAP_SUMMARY_PROMPT`, a summary + quiz is created.  
+6. **Keyword Extraction:** Top keywords extracted using frequency counts.
+
+### 🔹 3. Visualization (`modules/visualize.py`)
+- Renders **D3.js Mind Map** with color-coded nodes.
+- Includes:
+  - Hover explanations
+  - Zoom/pan controls
+  - PNG download button  
+
+### 🔹 4. Smart Study Companion (`app.py`)
+- Right panel shows:
+  - AI-generated **flashcards**
+  - **Quick quizzes** with answers & scoring  
+- Regeneration button lets users get new flashcards on demand.
+
+---
+
+## 🧠 End-to-End Flow Diagram
+
+[User Uploads File]
+↓
+[Text Extraction (PDF/PPTX/TXT)]
+↓
+[Gemini NLP Processing → Topics + Subtopics]
+↓
+[Hierarchy → Nodes + Edges]
+↓
+[D3 Visualization → Mind Map]
+↓
+[Hover AI Explanations]
+↓
+[Summary + Flashcards + Quiz]
+
 
 ---
 
 ## 🧰 Tech Stack
 
-**Frontend & Visualization**
-- 🧩 Streamlit  
-- 🎨 D3.js  
-- 🖼️ save-svg-as-png (for downloads)
-
-**Backend & NLP**
-- 🤖 Google Gemini (Text Summarization, Hierarchical Structuring, Question Generation)
-- 🧠 Python (Text Processing, Keyword Extraction)
-- 📄 PyMuPDF (`fitz`) and python-pptx (for text extraction)
-- 🌿 dotenv (for API key security)
-
-**Data Representation**
-- JSON-based hierarchical knowledge graphs
-- Graph → Node + Edge conversion → Mind map visualization
+| Layer | Technologies Used |
+|--------|-------------------|
+| 🖥️ **Frontend** | Streamlit, HTML, CSS, D3.js |
+| 🧩 **Visualization** | D3 Tree Layout, save-svg-as-png |
+| 🧠 **NLP & AI** | Google Gemini (Text Summarization, Structuring, QA Generation) |
+| 🐍 **Backend** | Python, dotenv, json, time, uuid |
+| 📄 **Data Handling** | PyMuPDF (`fitz`), python-pptx |
+| 🔍 **Text Analytics** | Tokenization, Keyword Frequency Analysis |
+| 🔒 **Security** | .env-based API key management |
 
 ---
 
 ## 📚 Example Workflow
-
-1. **Upload a PDF or Paste Text**
-   > Example: “Introduction to Artificial Intelligence”
-
-2. **Processing**
-   - Gemini analyzes and extracts hierarchical structure:
-     ```
-     Artificial Intelligence
-     ├── Machine Learning
-     │   ├── Supervised Learning
-     │   └── Unsupervised Learning
-     ├── Natural Language Processing
-     └── Robotics
-     ```
-3. **Visualization**
-   - D3 mind map appears interactively.
-
-4. **Hover**
-   - Hover over “Machine Learning” →  
-     *“In simple terms, ML enables systems to learn from data…”*
-
-5. **Flashcards & Quiz**
-   - Q: *What is the goal of Machine Learning?*  
-     A: *To enable systems to improve automatically through data experience.*
-
-6. **Download**
-   - Click 📸 *Download Mind Map (PNG)*
+    A[User Uploads File] --> B(Text Extraction: PDF/PPTX/TXT);
+    B --> C(Gemini NLP Processing: Topics + Subtopics);
+    C --> D(Hierarchy → Nodes + Edges);
+    D --> E(D3 Visualization → Mind Map);
+    E --> F(Hover AI Explanations);
+    D --> G(Summary + Flashcards + Quiz);
+    E --> H(Download as PNG);
 
 ---
 
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the Repository
-```bash
+```
 git clone https://github.com/AvniBhardwaj1/MapMyNotes.git
 cd MapMyNotes
+⚙️ Installation & Setup
+```
+## 2️⃣ Create Virtual Environment
+```
+python -m venv venv
+# macOS/Linux
+source venv/bin/activate     
+# Windows
+venv\Scripts\activate
+```
+## 3️⃣ Install Dependencies
+```
+pip install -r requirements.txt
+```
+## 4️⃣ Add Gemini API Key
+
+Create a .env file in your project’s root directory and add:
+```
+GEMINI_API_KEY=your_api_key_here
+```
+## 5️⃣ Run the App
+```
+streamlit run app.py
+```
+
+## 🧠 NLP Concepts Demonstrated
+🧩 Concept	💡 Description
+🧹 Text Preprocessing	Cleaning, chunking, and token normalization
+🧾 Summarization	Extractive + abstractive summarization via Gemini
+🧱 Topic Extraction	Hierarchical semantic structuring
+💬 Paraphrasing	Simplified layman + technical explanations for clarity
+🧮 Keyword Extraction	Frequency and co-occurrence-based feature extraction
+🎯 Question Generation	Auto-generated flashcards & quizzes from summarized content
+🕸️ Graph Representation	Mind maps built from node–edge graph structure using D3.js
+
 
 ## 🌱 Future Enhancements
+``` bash
+“Innovation never stops — these are the next steps planned for MapMyNotes.”
 
-> _“Innovation never stops — these are the next steps planned for MapMyNotes.”_
+🔹 1. Domain-Aware Learning
 
-### 🔹 1. Domain-Aware Learning
-Automatically detect the **subject domain** (e.g., Medical, Engineering, Finance) to tailor explanations, tone, and quiz difficulty level according to the user’s discipline.
+Automatically detect the subject domain (e.g., Medical, Engineering, Finance) to tailor explanations, tone, and quiz difficulty level according to the content.
 
-### 🔹 2. Multi-Document Mapping
-Enable uploading **multiple notes or PDFs at once** to generate cross-linked mind maps, showing how concepts across subjects interconnect — ideal for interdisciplinary learning.
+🔹 2. Multi-Document Mapping
 
-### 🔹 3. Semantic Search
-Integrate a **vector-based semantic search** (using Sentence-BERT, Word2Vec, or MiniLM) to help users find conceptually related topics or terms within and across uploaded notes.
+Allow uploading multiple documents at once to build cross-linked knowledge maps, showing how different concepts connect across topics.
 
-### 🔹 4. Voice Interaction
-Incorporate **speech-to-text** and **text-to-speech** features to let users speak their notes and listen to AI-generated summaries or quiz questions — promoting hands-free learning.
+🔹 3. Semantic Search
 
-### 🔹 5. Enhanced Mind Map Intelligence
-Introduce **auto-clustering**, **smart node resizing**, and **focus mode**, allowing the map to automatically expand or collapse sections based on importance or user interactions.
+Integrate a vector-based semantic search (using Sentence-BERT or Word2Vec) to find related concepts within or across notes.
 
-### 🔹 6. Cloud Integration
-Allow users to **save and sync** their generated mind maps to Google Drive, Firebase, or Notion, ensuring persistent access and collaboration across devices.
+🔹 4. Voice Interaction
 
-### 🔹 7. Study Analytics Dashboard
-Develop a **learning analytics dashboard** that tracks progress — topics studied, quiz scores, and weaker areas — and recommends personalized revision strategies.
+Enable speech-to-text and text-to-speech capabilities so learners can dictate notes and listen to AI-generated explanations hands-free.
 
-### 🔹 8. AI Tutor Mode
-Transform the flashcards into an **interactive AI tutor chatbot** that explains topics conversationally, answers follow-up questions, and helps students revise dynamically.
+🔹 5. Enhanced Mind Map Intelligence
 
----
+Introduce auto-clustering and focus mode — automatically expand or collapse nodes based on their relevance or importance.
 
+🔹 6. Cloud Integration
+
+Allow users to save and sync generated mind maps to Google Drive, Firebase, or Notion for easy access and collaboration.
+
+🔹 7. Study Analytics Dashboard
+
+Develop a learning analytics dashboard that tracks user progress, quiz results, and study time to provide personalized recommendations.
+
+🔹 8. AI Tutor Mode
+
+Convert flashcards into an interactive chatbot tutor that explains concepts conversationally and guides users through difficult topics.
+``` 
 ## 👩‍💻 Author
 
-**Avni Bhardwaj**  
-B.Tech Computer Engineering – SVKM’s NMIMS, Indore  
-🔗 [GitHub](https://github.com/AvniBhardwaj1)
-
+Avni Bhardwaj
+🎓 B.Tech Computer Engineering – SVKM’s NMIMS, Indore
+## 🧩 Acknowledgments
+Special thanks to Google Gemini API for enabling advanced NLP and to Streamlit for providing an easy-to-use web framework.
+<p align="center"> <i>“Transform your notes into knowledge — one mind map at a time.”</i><br><br> 🧠 Made with ❤️ by <b>Avni Bhardwaj</b> </p> ```
